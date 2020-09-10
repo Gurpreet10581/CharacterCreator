@@ -19,4 +19,19 @@ router.post("/signup", (req,res) => {
     );
 });
 
+router.post('/signin', (req, res) => {
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    }) .then(
+        loginSuccess = (user) => {
+            res.status(200).json({
+                user: user,
+                message: 'Successfully logged in!'
+            })
+        })
+        .catch(err => res.status(500).json({ error: err }))
+});
+
 module.exports = router;
