@@ -9,7 +9,13 @@ router.post("/signup", (req,res) => {
         password: req.body.password
     })
     .then(
-        res.send("This is our user/create endpoint!")
+        createSuccess = (user) => {
+            res.json({
+                user: user,
+                message: 'user created'
+            })
+        },
+        createError = err => res.status(500).json(err)
     );
 });
 
