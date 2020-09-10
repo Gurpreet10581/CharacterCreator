@@ -1,8 +1,9 @@
 const express = require('express');
+const validateSession = require('../Middleware/validateSession');
 const router = express.Router();
 const Character = require('../db').import('../Models/character');
 
-router.post('/', (req, res) => {
+router.post('/', validateSession, (req, res) => {
     const charaFromRequest = {
         name: req.body.name,
         species: req.body.species,
@@ -20,7 +21,7 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 })
 
-router.put('/:id', function (req, res){
+router.put('/:id',validateSession, function (req, res){
     Character.update(
         req.body, {where: 
             {id: req.params.id}
@@ -30,7 +31,7 @@ router.put('/:id', function (req, res){
     .catch(err => res.status(500).json({error: err}))
 });
 
-router.delete('/:id',function(req, res){
+router.delete('/:id', validateSession, function(req, res){
     Character.destroy(
         {where: {id: req.params.id}}
     )
