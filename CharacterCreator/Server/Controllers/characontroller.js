@@ -20,22 +20,22 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 })
 
-// router.put('/:id', function (req, res){
-//     Character.update(
-//         req.body, {where: 
-//             {id: req.params.id}
-//         }
-//     )
-//     .then(chara=> res.status(200).json(chara))
-//     .catch(err => res.status(500).json({error: err}))
-// });
+router.put('/:id', function (req, res){
+    Character.update(
+        req.body, {where: 
+            {id: req.params.id}
+        }
+    )
+    .then(chara=> res.status(200).json(chara))
+    .catch(err => res.status(500).json({error: err}))
+});
 
-// router.delete('/:id',function(req, res){
-//     Character.destroy(
-//         {where: {id: req.params.id}}
-//     )
-//     .then(() => res.status(200).json({message: "Character Entry Removed"}))
-//     .catch(err => res.status(500).json({error: err}))
-// })
+router.delete('/:id',function(req, res){
+    Character.destroy(
+        {where: {id: req.params.id}}
+    )
+    .then(() => res.status(200).json({message: "Character Entry Removed"}))
+    .catch(err => res.status(500).json({error: err}))
+})
 
 module.exports = router;
