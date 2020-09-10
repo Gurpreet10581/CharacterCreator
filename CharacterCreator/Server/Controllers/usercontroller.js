@@ -30,12 +30,25 @@ router.post('/signin', (req, res) => {
         }
     }) .then(
         loginSuccess = (user) => {
-            res.status(200).json({
-                user: user,
-                message: 'Successfully logged in!'
-            })
-        })
-        .catch(err => res.status(500).json({ error: err }))
+            if (user) {
+                bcrypt.compare(req.body.password, user.password, (err, matches) => {
+                    if(matches){
+                        let token = jwt.sign({id: user.id, email: user.email},process.env.JWT_SECRET, {expiresIn: '1d'})
+                        res.json({
+                            user: user,
+                            message: 'successfully authenticated user',
+                            sessionToken: token
+                        })
+                    } else {
+                        res.status(502).send({ error: 'bad gateway'})
+                    }
+                })
+            } else {
+                res.status(500).send({ error: 'failed to authenticate'})
+            }
+            
+        }, err => res.status(501).send({ error: 'failed to process'})
+        )
 });
 
 module.exports = router;
