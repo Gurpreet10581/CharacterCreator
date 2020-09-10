@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('CharacterCreator', 'postgres', 'FlyMe2TheMoon!1995', {
+const sequelize = new Sequelize(process.env.NAME, 'postgres', process.env.PASS, {
     host: 'localhost',
     dialect: 'postgres'
 });
@@ -7,5 +7,7 @@ const sequelize = new Sequelize('CharacterCreator', 'postgres', 'FlyMe2TheMoon!1
 sequelize.authenticate()
 .then(() => console.log("postgres db is connected"))
 .catch(err => console.log(err));
+
+
 
 module.exports = sequelize;
