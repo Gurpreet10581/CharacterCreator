@@ -22,11 +22,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
 
         },
-        ownerID:
+        ownerId:
         {
             type: DataTypes.INTEGER
         }
 
     })
     return Character;
-};
+
+ };
+
