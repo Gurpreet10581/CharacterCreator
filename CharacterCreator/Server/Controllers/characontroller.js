@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
         description: req.body.description
     }
     Character.create(charaFromRequest)
-    .then(chara => res.status(200).json(chara))
+    .then((chara) => res.status(200).json({message: "Character successfully created!", chara}))
     .catch(err => res.status(500).json({error: err}))
 })
 
@@ -26,7 +26,7 @@ router.put('/:id', function (req, res){
             {id: req.params.id}
         }
     )
-    .then(chara=> res.status(200).json(chara))
+    .then(() => res.status(200).json({message: "Character updated."}))
     .catch(err => res.status(500).json({error: err}))
 });
 
@@ -34,7 +34,7 @@ router.delete('/:id',function(req, res){
     Character.destroy(
         {where: {id: req.params.id}}
     )
-    .then(() => res.status(200).json({message: "Character Entry Removed"}))
+    .then(() => res.status(200).json({message: "Character Entry Removed."}))
     .catch(err => res.status(500).json({error: err}))
 })
 
