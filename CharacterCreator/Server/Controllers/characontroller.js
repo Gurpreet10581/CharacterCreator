@@ -8,7 +8,8 @@ router.post('/', validateSession, (req, res) => {
         name: req.body.name,
         species: req.body.species,
         ageInYears: req.body.age,
-        description: req.body.description
+        description: req.body.description,
+        ownerID: req.user.id
     }
     Character.create(charaFromRequest)
     .then((chara) => res.status(200).json({message: "Character successfully created!", chara}))
